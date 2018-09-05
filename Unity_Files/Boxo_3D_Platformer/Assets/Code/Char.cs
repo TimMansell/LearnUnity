@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Char : MonoBehaviour {
     public float Speed = 5f;
@@ -12,11 +13,18 @@ public class Char : MonoBehaviour {
 
     public float CharSpeed;
 
+    public Text CountText;
+    public Text WinText;
+    private int CountPickups;
+
     // Use this for initialization
     void Start () {
         gc = true;
         CharSpeed = SprintSpeed;
 
+        CountPickups = 0;
+
+        SetCountText();
     }
 
     private void FixedUpdate()
@@ -64,7 +72,35 @@ public class Char : MonoBehaviour {
         {
             GroundTouch = true;
         }
+
+        // Collision detection.
+       
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+
+        // Pickup items.
+        if (other.gameObject.CompareTag("Pickup"))
+        {
+            other.gameObject.SetActive(false);
+            CountPickups += 1;
+
+            SetCountText();
+        }
+    }
+
+    void SetCountText()
+    {
+        CountText.text = "Count: " + CountPickups.ToString();
+
+        if (CountPickups >= 12)
+        {
+            WinText.text = "CONGRATS YOU WON!!!";
+        }
+    }
+
+
 
     // Update is called once per frame
     void Update () {
