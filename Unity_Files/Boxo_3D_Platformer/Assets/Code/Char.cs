@@ -108,16 +108,17 @@ public class Char : MonoBehaviour {
                 WinText.text = "You lose :(";
             }
         }
+
+        // Finish detection.
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            WinText.text = "CONGRATS YOU WON!!!";
+        }
     }
 
     void SetCountText()
     {
         CountText.text = "Count: " + CountPickups.ToString();
-
-        if (CountPickups >= 12)
-        {
-            WinText.text = "CONGRATS YOU WON!!!";
-        }
     }
 
 
