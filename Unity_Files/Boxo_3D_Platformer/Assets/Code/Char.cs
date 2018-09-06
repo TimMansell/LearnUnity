@@ -7,6 +7,7 @@ public class Char : MonoBehaviour {
     public float Speed = 5f;
     public float SprintSpeed = 10f;
     public float Jump = 5f;
+    public float Hurt = 30f;
 
     public bool gc = false;
     public bool GroundTouch = false;
@@ -87,6 +88,25 @@ public class Char : MonoBehaviour {
             CountPickups += 1;
 
             SetCountText();
+        }
+
+        // Enemy collision.
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            transform.position += Vector3.back * Time.deltaTime * Hurt;
+
+            CountPickups -= 1;
+
+            SetCountText();
+
+
+
+            if (CountPickups <= -1)
+            {
+                Destroy(gameObject);
+
+                WinText.text = "You lose :(";
+            }
         }
     }
 
