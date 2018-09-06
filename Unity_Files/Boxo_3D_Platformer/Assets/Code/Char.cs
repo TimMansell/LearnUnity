@@ -18,6 +18,16 @@ public class Char : MonoBehaviour {
     public Text WinText;
     private int CountPickups;
 
+    public GameObject DeathZone1;
+    public GameObject DeathZone2;
+    public GameObject DeathZone3;
+    public GameObject DeathZone4;
+
+    public GameObject RespawnPoint1;
+    public GameObject RespawnPoint2;
+    public GameObject RespawnPoint3;
+    public GameObject RespawnPoint4;
+
     // Use this for initialization
     void Start () {
         gc = true;
@@ -99,14 +109,52 @@ public class Char : MonoBehaviour {
 
             SetCountText();
 
+            CheckLose();
+        }
 
+        // Respawn points.
+        if (other.gameObject == DeathZone1)
+        {
+            transform.position = RespawnPoint1.transform.position;
 
-            if (CountPickups <= -1)
-            {
-                Destroy(gameObject);
+            CountPickups -= 1;
 
-                WinText.text = "You lose :(";
-            }
+            SetCountText();
+
+            CheckLose();
+        }
+
+        if (other.gameObject == DeathZone2)
+        {
+            transform.position = RespawnPoint2.transform.position;
+
+            CountPickups -= 1;
+
+            SetCountText();
+
+            CheckLose();
+        }
+
+        if (other.gameObject == DeathZone3)
+        {
+            transform.position = RespawnPoint3.transform.position;
+
+            CountPickups -= 1;
+
+            SetCountText();
+
+            CheckLose();
+        }
+
+        if (other.gameObject == DeathZone4)
+        {
+            transform.position = RespawnPoint4.transform.position;
+
+            CountPickups -= 1;
+
+            SetCountText();
+
+            CheckLose();
         }
 
         // Finish detection.
@@ -121,7 +169,15 @@ public class Char : MonoBehaviour {
         CountText.text = "Count: " + CountPickups.ToString();
     }
 
+    void CheckLose()
+    {
+        if (CountPickups <= -1)
+        {
+            Destroy(gameObject);
 
+            WinText.text = "You lose :(";
+        }
+    }
 
     // Update is called once per frame
     void Update () {
