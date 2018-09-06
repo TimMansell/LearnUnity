@@ -112,6 +112,18 @@ public class Char : MonoBehaviour {
             CheckLose();
         }
 
+        // Spikes collision.
+        if (other.gameObject.CompareTag("EnviroHazard03"))
+        {
+            transform.position = RespawnPoint4.transform.position;
+
+            CountPickups -= 1;
+
+            SetCountText();
+
+            CheckLose();
+        }
+
         // Respawn points.
         if (other.gameObject == DeathZone1)
         {
